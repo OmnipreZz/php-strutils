@@ -5,21 +5,28 @@ require "./StrUtils.php";
 // pour tester !!  taper composer test dans la console !!
 class Test extends \PHPUnit\Framework\TestCase {
 
+    public function setUp() {
+        $this->classTest = new StrUtils('hello');
+    }
+
+    public function tearDown() {
+        unset($this->classTest);
+    }
+
+    public function testAttribute() {
+        $this->assertClassHasAttribute('str', Strutils::class);
+    }
+
     public function testBold() {
-        $TestStr = new StrUtils('hello');
-        $TestStr->bold();
-        $this->assertEquals('<strong>hello</strong>', $TestStr->bold());
+        $this->assertEquals('<strong>hello</strong>', $this->classTest->bold());
     }
 
     public function testItalic() {
-        $TestStr = new StrUtils('hello');
-        $this->assertEquals('<i>hello</i>', $TestStr->italic());
+        $this->assertEquals('<i>hello</i>', $this->classTest->italic());
     }
 
     public function testUnderline() {
-        $TestStr = new StrUtils('hello');
-        $TestStr->underline();
-        $this->assertEquals('<u>hello</u>', $TestStr->underline());
+        $this->assertEquals('<u>hello</u>', $this->classTest->underline());
     }
 }
 
